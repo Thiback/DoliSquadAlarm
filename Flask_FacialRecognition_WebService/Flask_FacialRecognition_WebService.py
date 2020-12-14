@@ -67,18 +67,9 @@ def takeScreen():
         pass
     filename = "filename.jpg"
     pygame.image.save(img,os.path.join(APP_ROOT, 'images') + "/filename.jpg")
-    
-    # for upload in request.files.getlist("file"):
-    #     filename = upload.filename
-    #     destination = "/".join([target, filename])
-    #     upload.save(destination)
-    #     print("Save it to:", destination)
-
     execution_path = target
     image = Predict("./images/filename.jpg")
     out_image = cv2.imwrite("./static/flaskfilename.jpg", image)
-    print('wrote out the image')
-    print('flask'+filename, file=sys.stderr)
     return render_template("hard.html", image_name="flask"+filename)
 
 
