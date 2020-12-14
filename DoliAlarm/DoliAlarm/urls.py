@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic import View
 from datetime import datetime
-from UserInterface import forms
+from UserInterface import forms, views
 from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
@@ -32,4 +32,5 @@ urlpatterns = [
         }
     )),
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
+    path('', views.HomePage.as_view()),
 ]
