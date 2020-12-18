@@ -72,7 +72,8 @@ def takeScreen():
     execution_path = target
     image = Predict("./images/filename.jpg")
     out_image = cv2.imwrite("./static/flaskfilename.jpg", image)
-    requests.get("https://smsapi.free-mobile.fr/sendmsg?user=40263279&pass=7YlEcnHdz6CMnE&msg=ok")
+#    import os
+#    os.system("curl -F \"username=piriou.benoit@hotmail.fr\"  -F \"token=7cae1e6a-3600-4845-aefe-a17904c5d801\" -F \"msisdn=882360011408502\" -F \"iccid=8944500301200277000\" -F \"message=deuxieme_test_curl_avec_msisdn_et_iccid\"  \"https://api.thingsmobile.com/services/business-api/sendSms\"")
     return render_template("hard.html", image_name="flask"+filename)
 
 
