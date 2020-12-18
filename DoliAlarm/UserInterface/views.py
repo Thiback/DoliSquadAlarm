@@ -45,3 +45,20 @@ class HomePage(View):
             return JsonResponse({"status": "ok"})
         except Exception as e:
             return JsonResponse({"status": 'ko', "message": str(e)})
+
+class Register(View):
+    template_name = "register.html"
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+    def post(self, request):
+        Email = request.POST.get("Email", None)
+        Password = request.POST.get("Password", None)
+        FirstName = request.POST.get("FirstName", None)
+        LastName = request.POST.get("LastName", None)
+        try:
+            User.objects.create_user(Email, email=Email, password=Password, first_name=FirstName, last_name=LastName)
+            return JsonResponse({'status': 'ok', 'message': "Account created"})
+        except Exception as e:
+            return JsonResponse({'status': 'ko', 'message': str(e)})

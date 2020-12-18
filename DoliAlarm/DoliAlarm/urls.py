@@ -35,6 +35,7 @@ urlpatterns = [
     )),
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('', views.HomePage.as_view()),
+    path('register/', views.Register.as_view()),
 ]
 
 # urlpatterns  +=  static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
