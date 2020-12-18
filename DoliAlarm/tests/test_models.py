@@ -39,13 +39,22 @@ class GaugeTest(TestCase):
     def test_new_save7(self):
         self.assertEqual(self.infoalarm.userLogin, "bob@marcel")
 
-    def test_new_save6(self):
+    def test_new_save25(self):
         self.assertEqual(self.infoalarm.alarmStatus, False)
 
     def test_exist_save(self):
         user = LogSMS.objects.get(firstName='test')
         user.save()
         self.assertEqual(True, True)
+
+    def test_new_save11(self):
+        self.assertEqual(self.logsms.firstName, "test")
+
+    def test_new_save12(self):
+        self.assertEqual(self.logsms.lastName, "test")
+
+    def test_new_save13(self):
+        self.assertEqual(self.logsms.responseStatus, "ok")
 
     def test_new_save1(self):
         self.assertNotEqual(self.logsms.firstName, "test1")
@@ -81,3 +90,12 @@ class GaugeTest(TestCase):
             self.assertIn("lastname", user) 
         except:
             self.assertIsNone(None)
+
+    def test_new_save8(self):
+        self.assertEqual(self.infoalarm.alarmPassword, "blabla")
+
+    def test_new_save9(self):
+        self.assertEqual(self.infoalarm.userPassword, "michel")
+
+    def test_new_save10(self):
+        self.assertEqual(self.infoalarm.userLogin, "bob@marcel")
