@@ -11,6 +11,13 @@ class GaugeTest(TestCase):
             dateTime = str(timezone.now()),
             responseStatus = "ok"
         )
+        self.infoalarm = InfoAlarm.objects.create (
+            phoneNumber = "07xx99xx99",
+            alarmPassword = "blabla",
+            userLogin = "bob@marcel",
+            userPassword = "michel",
+            alarmStatus = False
+        )
 
     def test_new_save(self):
         self.assertEqual(self.logsms.firstName, "test")
@@ -19,6 +26,21 @@ class GaugeTest(TestCase):
         self.logsms.dateTime = timeStamp
         self.logsms.save()
         self.assertEqual(self.logsms.dateTime, timeStamp)
+
+    def test_new_save4(self):
+        self.assertEqual(self.infoalarm.phoneNumber, "07xx99xx99")
+
+    def test_new_save5(self):
+        self.assertEqual(self.infoalarm.alarmPassword, "blabla")
+
+    def test_new_save6(self):
+        self.assertEqual(self.infoalarm.userPassword, "michel")
+
+    def test_new_save7(self):
+        self.assertEqual(self.infoalarm.userLogin, "bob@marcel")
+
+    def test_new_save6(self):
+        self.assertEqual(self.infoalarm.alarmStatus, False)
 
     def test_exist_save(self):
         user = LogSMS.objects.get(firstName='test')
