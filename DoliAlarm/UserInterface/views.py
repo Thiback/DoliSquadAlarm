@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.contrib.auth.models import User
 from django.http import HttpResponse, JsonResponse
+import datetime
 from .models import *
 import requests
 
@@ -23,10 +24,21 @@ def sendSMSAlarm(request, action, info):
     print("ko")
     return "ko"
 
+def cleanAccounts():
+    users = User.objects.all().filter(is_superuser=False)
+    date = datetime.datetime.now(timezone.utc)- datetime.timedelta(seconds=30)
+
+    for user in users:
+        print(str(type(user.date_joined)) + " date_joined " + str(user.date_joined))
+        print(str(type(date)) + " date " + str(date))
+        if user.date_joined < date:
+            user.delete()
+
 class HomePage(View):
     template_name = "Index.html"
 
     def get(self, request):
+        cleanAccounts()
         if request.user.is_authenticated == False:
             return redirect("/login/")
         return render(request, self.template_name)
