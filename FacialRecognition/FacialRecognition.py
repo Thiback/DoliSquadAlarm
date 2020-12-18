@@ -4,6 +4,8 @@ import os.path
 import os
 import cv2
 
+import requests
+
 import sys
 
 import pygame
@@ -70,6 +72,7 @@ def takeScreen():
     execution_path = target
     image = Predict("./images/filename.jpg")
     out_image = cv2.imwrite("./static/flaskfilename.jpg", image)
+    requests.get("https://smsapi.free-mobile.fr/sendmsg?user=40263279&pass=7YlEcnHdz6CMnE&msg=ok")
     return render_template("hard.html", image_name="flask"+filename)
 
 
