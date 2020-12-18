@@ -5,14 +5,22 @@ from django.http import HttpResponse, JsonResponse
 import datetime
 from .models import *
 import requests
+import os
+import subprocess
 
 # Create your views here.
 def sendSMSAlarm(request, action, info):
     # return "ok"
-    url = "https://smsapi.free-mobile.fr/sendmsg?user=" + info.userLogin + "&pass=" + info.userPassword + "&msg=" + info.alarmPassword + action + "#"
-    print(url)
-    result = requests.post(url)
-    if result.status_code == 200:
+
+    #working
+    url = 'curl -F "username=piriou.benoit@hotmail.fr"  -F "token=7cae1e6a-3600-4845-aefe-a17904c5d801" -F "msisdn=882360011408502" -F "iccid=8944500301200277000" -F "message=' + info.alarmPassword + action + '#"  "https://api.thingsmobile.com/services/business-api/sendSms"'
+    
+    out = subprocess.run(url, shell=True, check=True, capture_output=True)
+    print(out)
+    print(out.stdout)
+    print(type(out))
+    # if result.status_code == 200:
+    if "<done>true</done>" in str(out.stdout, 'utf-8'):
         print("ok")
         LogSMS.objects.create(firstName=request.user.first_name, lastName=request.user.last_name, responseStatus="200")
         if (action == "1"):
@@ -20,7 +28,7 @@ def sendSMSAlarm(request, action, info):
         else:
             InfoAlarm.objects.update(alarmStatus= False)
         return "ok"
-    LogSMS.objects.create(firstName=request.user.first_name, lastName=request.user.last_name, responseStatus=str(result.status_code))
+    LogSMS.objects.create(firstName=request.user.first_name, lastName=request.user.last_name, responseStatus="Error")
     print("ko")
     return "ko"
 
