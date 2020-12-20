@@ -76,7 +76,7 @@ def takeScreen():
     image = Predict("./images/filename.jpg")
     out_image = cv2.imwrite("./static/flaskfilename.jpg", image)
 
-    url = 'curl -F "username=piriou.benoit@hotmail.fr"  -F "token=7cae1e6a-3600-4845-aefe-a17904c5d801" -F "msisdn=882360011408502" -F "iccid=8944500301200277000" -F "message=' + info.alarmPassword + action + '#"  "https://api.thingsmobile.com/services/business-api/sendSms"'
+    url = 'curl -F "username=piriou.benoit@hotmail.fr"  -F "token=7cae1e6a-3600-4845-aefe" -F "msisdn=882360011408502" -F "iccid=8944500301200277000" -F "message=' + info.alarmPassword + action + '#"  "https://api.thingsmobile.com/services/business-api/sendSms"'
     
     out = subprocess.run(url, shell=True, check=True, capture_output=True)
 
