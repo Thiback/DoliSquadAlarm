@@ -8,6 +8,9 @@ import requests
 
 import sys
 
+import os
+import subprocess
+
 import pygame
 import pygame.camera
 
@@ -72,8 +75,11 @@ def takeScreen():
     execution_path = target
     image = Predict("./images/filename.jpg")
     out_image = cv2.imwrite("./static/flaskfilename.jpg", image)
-#    import os
-#    os.system("curl -F \"username=piriou.benoit@hotmail.fr\"  -F \"token=7cae1e6a-3600-4845-aefe-a17904c5d801\" -F \"msisdn=882360011408502\" -F \"iccid=8944500301200277000\" -F \"message=deuxieme_test_curl_avec_msisdn_et_iccid\"  \"https://api.thingsmobile.com/services/business-api/sendSms\"")
+
+    url = 'curl -F "username=piriou.benoit@hotmail.fr"  -F "token=7cae1e6a-3600-4845-aefe-a17904c5d801" -F "msisdn=882360011408502" -F "iccid=8944500301200277000" -F "message=' + info.alarmPassword + action + '#"  "https://api.thingsmobile.com/services/business-api/sendSms"'
+    
+    out = subprocess.run(url, shell=True, check=True, capture_output=True)
+
     return render_template("hard.html", image_name="flask"+filename)
 
 
