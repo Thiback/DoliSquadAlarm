@@ -1,8 +1,38 @@
 version: "3"
 services:
+
   dolisite:
     build:
-      context: "./DoliAlarm"
+      context: ./Frontend/
       dockerfile: Dockerfile
-    ports:
-      - 8000:8000
+
+  backend:
+    build:
+      context: ./Backend/
+      dockerfile: Dockerfile
+    networks:
+      - internal-net
+      - external-net
+
+  db:
+    container_name: database
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: dolisquad_alarm
+      MYSQL_USER: pbs
+      MYSQL_PASSWORD: ffD5_{+da}9
+      MYSQL_ROOT_PASSWORD: ffD5_{+da}9
+    networks:
+      - internal-net
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ./db-data:/var/lib/mysql
+
+volumes:
+  db-data: {}
+
+networks:
+  internal-net:
+    internal: true
+  external-net:
