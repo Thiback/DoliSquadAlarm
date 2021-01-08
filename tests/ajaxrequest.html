@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="ajaxrequest.js">
+$(document).ready(function(){
+    $("#good_creds").click(function() {
+        $.ajax({
+            url: "http://localhost:8080/login",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+                email: "pbs@gmail.com",
+                password: "kerui"
+            }),
+            success: function(response) {
+                console.log("logged in");
+                console.log(response);
+            },
+            error: function(xhr) {
+                console.log("error");
+                console.log(xhr);
+            }
+        });
+    });
+    $("bad_pw").click(function()
+    {
+        $.ajax({
+            url: "http://localhost:8080/login",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+                email: "pbs@gmail.com",
+                password: "toto",
+            }),
+            success: function (response) {
+                console.log("logged in");
+                console.log(response);
+            },
+            error : function(xhr) {
+                console.log("error");
+                console.log(xhr);
+            }
+        });
+    });
+    $("bad_email").click(function()
+    {
+        $.ajax({
+            url: "http://localhost:8080/login",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({
+                email: "toto@gmail.com",
+                password: "kerui",
+            }),
+            success: function (response) {
+                console.log("logged in");
+                console.log(response);
+            },
+            error : function(xhr) {
+                console.log("error");
+                console.log(xhr);
+            }
+        });
+    });
+});
+</script>
+</head>
+<body>
+
+<div style="display: flex; flex-direction: row;">
+    <h3>Login</h3>
+    <button id="good_creds">Login with good credentials</button>
+    <button id="bad_pw">Login with good credentials</button>
+    <button id="bad_email">Login with bad email</button>
+</div>
+</body>
+
+</html>

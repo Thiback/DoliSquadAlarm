@@ -2,11 +2,6 @@ const jwt = require("jsonwebtoken");
 const secret = process.env.SECRET || "-The_5ecret-5y5tem_of-the_5even-5tar5_";
 const tokenExpirySeconds = 60;
 
-var user = {
-    username:"thiback",
-    password:"toto"
-}
-
 function generateJWT(username)
 {
     var token;
@@ -20,6 +15,10 @@ function generateJWT(username)
     }
 }
 
+// todo : checkAdmin
+
+
+// todo : generate out of the body email. No password checking
 function login(req, res)
 {
     var username = req.body.username;
